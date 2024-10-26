@@ -1,0 +1,100 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "overlay",
+    "height": 30,
+    "spacing": 6,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "tray",
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "power-profiles-daemon",
+        "battery",
+        "clock",
+    ],
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%I:%M %p}"
+    },
+    "battery": {
+        "states": {
+            "good": 90,
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 1,
+        "format": "{icon}",
+        "format-full": "{icon}",
+        "format-charging": "{icon}",
+        "format-plugged": "{icon}",
+        "tooltip-format": "{capacity}%",
+        "format-icons": {
+          "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+          "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+          "full": "󱟢"
+        }
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    "network": {
+        "on-click": "kitty sh -c \"nmtui\"",
+        "tooltip-format": "{ifname} ({essid}) via {gwaddr}",
+        "format": "{icon}",
+        "format-icons": {
+            "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+            "ethernet": "",
+            "linked": "󱎔",
+            "disconnected": "󰤮",
+            "default": "󰛵"
+        },
+    },
+    "pulseaudio": {
+        "scroll-step": 10, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "󰝟",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󱡏",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "/usr/bin/pavucontrol"
+    },
+    "hyprland/workspaces": {
+        "format": ""
+    },
+    "hyprland/window": {
+        "format": "{title}",
+        "icon": true,
+        "icon-size": 16,
+    },
+}

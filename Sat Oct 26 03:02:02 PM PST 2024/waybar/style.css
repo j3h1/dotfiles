@@ -1,0 +1,191 @@
+@define-color background-color rgba(23, 41, 67, 0.6);
+@define-color border-color rgba(157, 169, 168, 0.5);
+@define-color accent-color rgba(237, 240, 222, 1);
+@define-color second-color rgba(10, 18, 30, 0.7);
+@define-color accent-color-highlight #9DA9A8;
+@define-color second-color-highlight #172943;
+
+* {
+  all: unset;
+  font-family: SF Pro Display, Symbols Nerd Font;
+  font-weight: 400;
+  font-size: 12px;
+
+  transition-property: all;
+  transition-duration: .3s;
+  transition-timing-function: cubic-bezier(.25,.75,.75,1);
+}
+
+#window {
+  color: @accent-color;
+}
+
+tooltip, menu {
+    padding: 4px 16px;
+    color: @accent-color;
+    border-radius: 8px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+
+    background: @background-color;
+
+    margin: 8px;
+
+    outline: none;
+    border: none;
+}
+
+window#waybar {
+  background-color: @background-color;
+  min-height: 0;
+
+  border-radius: 0;
+
+  border-bottom: solid 1px @border-color;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#power-profiles-daemon,
+#tray,
+#clock {
+  padding: 0px 4px;
+  margin: 0px 0px;
+  color: @accent-color;
+}
+
+.modules-left {
+  padding-left: 6px;
+
+  background-color: @second-color;
+  padding: 0px 8px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+
+  border: 1px solid @border-color;
+  border-left: none;
+  border-top: none;
+}
+
+.modules-center {
+  background-color: @second-color;
+  margin: 4px 0px;
+  padding: 0px 32px;
+  border-radius: 16px;
+
+  border: 1px solid @border-color;
+}
+
+.modules-right {
+  padding-right: 6px;
+
+  background-color: @second-color;
+  padding: 0px 8px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  
+  border: 1px solid @border-color;
+  border-right: none;
+  border-top: none;
+}
+
+#clock {
+  font-weight: 600;
+  margin: 0px 8px;
+  min-width: 64px;
+}
+
+#battery {
+}
+
+#battery.charging, #battery.plugged {
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+  }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#workspaces {
+  margin: 0px 8px;
+}
+
+#workspaces button {
+  min-height: 0;
+  min-width: 8px;
+
+  padding: 0px 8px;
+  margin: 8px 2px;
+
+  border-radius: 16px;
+  border: solid 1px @accent-color;
+
+  opacity: 1;
+  background: linear-gradient(90deg, transparent 100%, @accent-color 100%);
+}
+
+#workspaces button:hover {
+  background: linear-gradient(90deg, transparent 0%, @accent-color 100%);
+}
+
+#workspaces button.active {
+  background: linear-gradient(0deg, transparent 0%, @accent-color 0%);
+  padding: 0px 16px;
+  opacity: 1.0;
+}
+
+#workspaces button.urgent {
+}
+
+#power-profiles-daemon {
+  padding: 0px 6px;
+  margin: 6px 0px;
+}
+
+#power-profiles-daemon.performance {
+}
+
+#power-profiles-daemon.balanced {
+}
+
+#power-profiles-daemon.power-saver {
+}
+
+#network {
+}
+
+#network.disconnected {
+}
+
+#pulseaudio {
+  min-width: 64px;
+  margin: 0px 16px;
+}
+
+#pulseaudio.muted {
+}
+
+#tray {
+  margin: 0px 16px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}

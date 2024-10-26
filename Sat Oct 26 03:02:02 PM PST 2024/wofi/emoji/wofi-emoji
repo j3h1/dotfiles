@@ -1,0 +1,4 @@
+#!/bin/bash
+killall wofi
+cat ~/.config/wofi/emoji/emojis | wofi -n --show dmenu -i -x $(hyprctl cursorpos | sed -e "s/,/ -y/g") -w 32 -W 512 -s ~/.config/wofi/emoji/style.css | cut -d ' ' -f 1 | tr -d '\n' | wl-copy
+exit
