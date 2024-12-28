@@ -1,0 +1,158 @@
+( defpoll time_hour :interval "20s" "date '+%I'" )
+( defpoll time_minute :interval "20s" "date '+%M'" )
+( defpoll time_apm :interval "20s" "date '+%p'" )
+( defpoll battery :interval "1s" "assets/scripts/sh/get_battery.sh")
+( defpoll wifi_poll :interval "1s" "assets/scripts/sh/wifi.sh")
+( defpoll volume :interval "0.2s" "pamixer --get-volume")
+( defpoll brightness :interval "0.2s" "brightnessctl g")
+( defvar brightness_max "19200")
+
+( deflisten apm_bool :initial "disabled" "nmcli radio wifi")
+( deflisten dnd_bool :initial false "swaync-client --get-dnd")
+( deflisten mute_bool :initial false "pamixer --get-mute")
+( deflisten power_profile "powerprofilesctl get" )
+; ( deflisten current_wallpaper "sleep 0.1 && a=$(swww query | cut -d',' -f3) && echo \${a:30}" )
+
+( defpoll date :interval "1s" "date '+%b %d, %Y'")
+( defpoll time_week :interval "1s" "date '+%a'")
+
+( deflisten current_workspace :initial "1" "assets/scripts/sh/get_active_workspace.sh" )
+( deflisten workspaces :initial "[{}]" "assets/scripts/sh/workspaces.sh" )
+
+( deflisten music_status :initial "null" "assets/scripts/sh/music_status.sh")
+( deflisten music_info :initial "null" "assets/scripts/sh/music_detector.sh")
+( defpoll player_position :run-while {music_info != "null"} :interval "1s" "assets/scripts/sh/player_position.sh")
+
+( deflisten activewindow :initial "" "assets/scripts/sh/active_window.sh")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; ▀▄█
+; ░░▒▒▓▓██
+;                           ██████
+;                         ██    ██
+;                       ██  ▒▒  ██
+;                     ██  ▒▒  ██
+;                   ██  ▒▒░░██
+;                 ██  ▒▒░░██
+;     ▓▓▓▓      ██░░▒▒░░██
+;     ▓▓▒▒▓▓  ██░░▒▒░░██
+;       ▓▓░░▓▓░░▓▓░░██
+;       ▓▓▒▒░░▓▓▒▒██
+;         ▓▓▒▒▓▓██ how did you find me
+;       ██▒▒██▓▓▓▓██
+;     ██▒▒██  ████▓▓██
+; ▓▓▓▓▒▒██        ████
+; ▓▓░░▓▓
+; ▓▓▓▓▓▓

@@ -1,0 +1,170 @@
+( defwidget menu []
+    ( box :orientation "v" :space-evenly false :class "menu"
+        ( centerbox :orientation "h" :class "menu-topbar white-bg"
+            ( box :space-evenly false 
+                ( image :path "assets/images/today.svg" :class "no-use" :image-width 18 )
+                ( label :text "${date}" )
+                ( box :hexpand true )
+            )
+            
+            ( box   :class "a-bar-that-doesnt-have-any-purpose-whatsoever" )
+    
+            ( box :space-evenly false
+                ( box :hexpand true )
+                ( label :class "percentage" :text "${battery.percent}%" )
+                (battery :icon-size 18)
+            )
+        )
+
+        ( box :vexpand true
+            ( box :orientation "v"
+                ( box :orientation "h"
+                    ( box :orientation "v"
+                        ( box :orientation "v" :class "white-bg" :space-evenly false
+                            ( circular-progress :value {EWW_CPU["avg"]} :clockwise true :thickness 8 :vexpand true
+                                ( image :path "assets/images/cpu.svg" :halign "center" :image-width 64 )
+                            )
+                            ( box :orientation "h"
+                                ( label :text "CPU" :class "text-highlight" )
+                                ( label :text "${round(EWW_CPU['avg'], 0)}%" )
+                            )
+                        )
+
+                        ( box :orientation "v" :class "white-bg"  :space-evenly false
+                            ( circular-progress :value {EWW_RAM['used_mem_perc']} :clockwise true :thickness 8 :vexpand true
+                                ( image :path "assets/images/memory.svg" :halign "center" :image-width 64 )
+                            )
+                            ( box :orientation "h"
+                                ( label :text "RAM" :class "text-highlight")
+                                ( label :text "${round(EWW_RAM['used_mem']/1000000000, 1)} GB" )
+                            )
+                        )
+                    )
+                    ( box :class "white-bg time-menu" :orientation "v" :space-evenly false
+                        ( box :vexpand true )
+                        ( label :text "~" :class "fuckyou" )
+                        ( label :text "${time_week}" :class "weekday" )
+                        ( label :text "${time_hour}")
+                        ( label :text "${time_minute}")
+                        ( label :text "${time_apm}")
+                        ( label :text "~" :class "fuckyou" )
+                        ( box :vexpand true )
+                    )
+                    ( box :orientation "v"
+                        ( box   :class "white-bg no-padding"
+                            (menubutton :text "APM" 
+                                        :icon-path "assets/images/airplane_mode.svg"
+                                        :icon-size 32
+                                        :on {apm_bool == "disabled"}
+                                        :onclick "assets/scripts/sh/toggle_apm.sh"
+                            )
+                        )
+
+                        ( box   :class "white-bg no-padding"
+                            ( button :class "menubutton" :onclick "assets/scripts/sh/next_profile.sh &"
+                                ( box :orientation "h"
+                                    ( label :class "disabled text" :text "PWR" :hexpand true :vexpand true)
+
+                                    ( stack :selected {power_profile == "balanced" ? 0 : (power_profile == "performance" ? 1 : 2 ) }
+                                            :transition "slideleft"
+                                        ( image :path "assets/images/power_balanced.svg" :image-width 32 )
+                                        ( image :path "assets/images/power_performance.svg" :image-width 32 )
+                                        ( image :path "assets/images/power_power-saver.svg" :image-width 32 )
+                                    )
+                                )
+                            )
+                        )
+
+                        ( box   :class "white-bg no-padding"
+                            ( button :class "menubutton" :onclick "assets/scripts/sh/toggle_dnd.sh &"
+                                ( box :orientation "h"
+                                    ( label :class "${dnd_bool ? 'enabled' : 'disabled'} text" :text "DND" :hexpand true :vexpand true)
+                                    ( stack :selected {dnd_bool ? 0 : 1 }
+                                            :transition "slideleft"
+                                        ( image :path "assets/images/dnd_on.svg" :image-width 32 )
+                                        ( image :path "assets/images/dnd_off.svg" :image-width 32 )
+                                    )
+                                )
+                            )
+                        )
+
+                        ( box   :class "white-bg no-padding"
+                            ( button :class "menubutton" :onclick "assets/scripts/sh/toggle_mute.sh &"
+                                ( box :orientation "h"
+                                    ( label :class "${mute_bool ? 'enabled' : 'disabled'} text" :text "MTE" :hexpand true :vexpand true)
+                                    ( stack :selected {mute_bool ? 0 : 1 }
+                                            :transition "slideleft"
+                                        ( image :path "assets/images/volume_mute.svg" :image-width 32 )
+                                        ( image :path "assets/images/volume_2.svg" :image-width 32 )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                ( box :orientation "v"
+                    ( box :class "white-bg" :orientation "v"
+                        ( box :orientation "h" :space-evenly false
+                            ( image :path "assets/images/brightness.svg" :class "slider-icon" :image-width 32 )
+                            ( scale :orientation "h" :class "large-slider" :value brightness :hexpand true :min 1 :max brightness_max :onchange "brightnessctl s {} -q")
+                        )
+                        ( box :orientation "h" :space-evenly false
+                            ( box :class "slider-icon" ( volume :icon-size 32 ) )
+                            ( scale :value volume :orientation "h" :class "large-slider" :hexpand true :min 0 :max 100 :onchange "pamixer --set-volume {}")
+                        )
+                    )
+                    ( box   :style "background: url('${music_info[0].image}'); background-position: right; background-size: 50%; padding: 0; border-radius: 1.2rem;" :class "white-bg" :visible {music_info == "null"? false:true}
+                        ( overlay 
+                            ( box   :class "gradient"
+                                ( box   :orientation "v" :hexpand true :class "music-info" :space-evenly false :valign "center"
+                                    ( label :class "music-title" :text {music_info[0].title} )
+                                    ( label :class "music-artist" :text {music_info[0].artist} )
+                                    ( scale :max {music_info[0].length / 1000000} :value {player_position} :onchange "playerctl -p ${music_info[0].player} position {}" )
+                                    ( box :orientation "h"
+                                        ( button :onclick "" :class {music_status.shuffle ? "has-dot" : "" }
+                                            ( image :path "assets/images/shuffle.svg" :image-width 20 )
+                                        )
+                                        ( button :onclick "playerctl shuffle"
+                                            ( image :path "assets/images/prev.svg" :image-width 20 )
+                                        )
+                                        (button :onclick "assets/scripts/sh/toggle_player.sh"
+                                            ( image :path "assets/images/${music_status.status=='Playing'?'pause':'play'}.svg" :image-width 20 )
+                                        )
+                                        (button :onclick "playerctl next"
+                                            ( image :path "assets/images/next.svg" :image-width 20 )
+                                        )
+                                        ( button :onclick "" :class {music_status.repeat == 'None' ? "" : "has-dot" }
+                                            ( image :path "assets/images/repeat${music_status.repeat == 'Track'? '-track' : '' }.svg" :image-width 20 )
+                                        )
+                                    )
+                                )
+                                ( box )
+                            )
+                            ( image :path "assets/images/${music_info[0].player}.svg" :valign "start" :halign "start" :style "padding: 0.5rem;")
+                        )
+                    )
+                    ( label :text "Nothing playing :(" :visible {music_info == "null"? true:false} :class "white-bg music-title" )
+                        ; {music_info["title"]}
+                    ; ( box :class "white-bg" :orientation "v" :style "background-image: url('${current_wallpaper}'); background-position: center; background-size: 110%; padding: 0"
+                    ;     ( button :onclick ""
+                    ;         ( box :style "background: linear-gradient(rgba(255, 255, 255, 0.5), white); border-radius: 1rem;" :orientation "h"
+                    ;             ( image :path "assets/images/wallpaper.svg" :image-width 96 )
+                    ;         )
+                    ;     )
+                    ; )
+                )
+            )
+        )
+    )
+)
+
+( defwindow menu :monitor 0
+        :geometry ( geometry
+            :y "16px"
+            :width "512px"
+            :height "80%"
+            :anchor "center top" )
+        :exclusive false
+    (menu :class "class")
+)

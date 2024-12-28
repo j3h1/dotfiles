@@ -1,0 +1,87 @@
+( defwidget logo []
+    ( button    :onclick "eww open --toggle powermenu" :class "logo"
+        ( image     :path "assets/images/power_settings.svg"
+                    :image-width 20
+                    :image-height 20
+        )
+    )
+)
+
+( defwidget time []
+    ( tooltip :class "time"
+        ( calendar )
+        ( box   :orientation "v"
+            ( box time_hour )
+            ( box time_minute )
+            ( box :class "apm" time_apm )
+        )
+    )
+)
+
+( defwidget volume [?icon-size]
+    ( tooltip
+        ( label     :text "Volume ${volume}%" )
+        ( image     :path "assets/images/volume_${round((volume / 100) * 2, 0)}.svg"
+                    :image-width icon-size
+                    :image-height icon-size
+        )
+    )
+)
+
+( defwidget wifi [?icon-size]
+    ( tooltip
+        ( label     :text "${ wifi_poll == 'null' ? 'No WiFi :(' : 'WiFi Strength ${wifi_poll}%'}" )
+        ( image     :path "assets/images/wifi_${ wifi_poll == 'null' || wifi_poll == 'wired' ? (wifi_poll == 'wired' ? 'wired' : 'off') : round((wifi_poll / 100) * 2, 0)}.svg"
+                    :image-width icon-size
+                    :image-height icon-size
+        )
+    )
+)
+
+( defwidget battery [?icon-size]
+    ( tooltip
+        ( label     :text "${battery.state} ${battery.percent}%" )
+        ( image     :path "assets/images/battery_${ ( battery.state == 'Charging' || battery.state == 'Full' ) ? 'charging_' : '' }${round((battery.percent / 100) * 7, 0)}.svg"
+                    :image-width icon-size
+                    :image-height icon-size
+        )
+    )
+)
+
+( defwidget icons []
+    ( button  :onclick "eww open --toggle menu" :vexpand true
+        ( box :orientation "h" :class "icons" :valign "center"
+            (battery :icon-size 16)
+            (wifi :icon-size 16)
+            (volume :icon-size 16)
+        )
+    )
+)
+
+( defwidget menubutton [?text icon-path icon-size on onclick]
+    ( button :class "menubutton" :onclick onclick
+        ( box :orientation "h"
+            ( label :class "${on ? 'enabled' : 'disabled'} text" :text text :hexpand true :vexpand true)
+            ( image :path icon-path :image-width icon-size )
+        )
+    )
+)
+
+; ( defwidget window_title []
+;     ( label 
+;         :text 
+;     )
+; )
+
+; ( defwidget menubutton_stacked [?text selected icon-paths icon-size on onclick]
+;     ( button :class "menubutton" :onclick onclick
+;         ( box :orientation "h"
+;             ( label :class "${on ? 'enabled' : 'disabled'} text" :text text :hexpand true :vexpand true)
+;             ( stack
+;                 ( for entry in icon-paths
+;                     ( image :path entry :image-width icon-size )
+;                 )
+;             )
+;         )
+;     )
+; )

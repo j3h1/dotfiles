@@ -1,0 +1,23 @@
+.workspaces {
+    border-radius: 2rem;
+    padding: 0.2rem 1rem;
+    margin: 6px 0rem;
+    background-color: $base-color;
+    border: rgba(128, 128, 128, 0.5) 1px solid;
+}
+
+.workspace {
+    border: unset;
+    border-radius: 1rem;
+    background: linear-gradient(0deg, $second-color 100%, $accent-color 100%);
+    padding: 0.5rem 0.5rem;
+    margin: 0.3rem 0.2rem;
+
+    transition: 0.3s;
+
+    &.current {
+        background: linear-gradient(90deg, $second-color 0%, $accent-color 0%);
+        padding: 0.5rem 1.25rem;
+        margin: 0.2rem 0.2rem;
+    }    
+}

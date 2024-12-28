@@ -1,0 +1,12 @@
+( defwidget workspaces []
+    ( eventbox
+        ( box :orientation "h" :space-evenly false :class "workspaces" :vexpand true
+            ( for workspace in workspaces
+                ( button 
+                    :class "workspace ${current_workspace == workspace.id ? "current" : ""}" 
+                    :onclick "hyprctl dispatch workspace ${workspace.id}" 
+                )
+            )
+        )
+    )
+)

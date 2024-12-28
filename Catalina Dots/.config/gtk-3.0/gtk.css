@@ -1,0 +1,37 @@
+@define-color sidebar-color rgba(240, 240, 240, 0.3);
+@define-color base-color rgba(255, 255, 255, 1);
+@define-color second-color rgba(224, 108, 159, 1);
+
+.thunar *,
+.thunar > *
+.thunar > grid,
+.thunar > grid > paned,
+paned.horizontal > box.vertical,
+*.view,
+*.sidebar.frame,
+.thunar > grid {
+	background: transparent;
+}
+
+.thunar grid > paned.horizontal > paned.horizontal ,
+.thunar toolbar,
+.thunar menubar {
+	background: @base-color
+}
+
+.thunar .sidebar {
+	background: @sidebar-color;
+}
+
+.thunar *:selected {
+	background: @second-color;
+}
+
+.thunar tooltip {
+	background: @sidebar-color;
+	color: black;
+}
+
+menu {
+	background : @sidebar-color;
+}

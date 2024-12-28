@@ -1,0 +1,116 @@
+$base-color: #F0F7FA;
+$accent-color: #084887;
+$second-color: #E06C9F;
+
+$bg-color: rgba(240, 247, 250, 0.3);
+$border-color: rgba(8, 72, 135, 0.5);
+
+$main-font: "Poppins";
+$time-font: "Rubik Mono One";
+$header-font: "Rubik Mono One";
+$time-wallpaper-font: "Major Mono Display";
+
+@import "assets/style/workspaces.scss";
+@import "assets/style/powermenu.scss";
+@import "assets/style/menu.scss";
+
+window {
+    // border-radius: 16px;
+    background: transparent;
+
+    font-family: $main-font;
+    // font-size: 15px;
+    color: $accent-color
+}
+
+// How to make the slowest application
+// * {
+    // transition: all cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    // transition-duration: 0.5s;
+// }
+
+button {
+    all: unset;
+}
+
+.bar {
+    background-color: $bg-color;
+    border-radius: 2rem;
+    
+    padding: unset;
+    padding-left: 8px;
+    padding-right: 8px;
+    
+    border: solid 1px $border-color;
+}
+
+tooltip .calendar {
+    all: unset;
+
+    border-radius: 16px;
+    background-color: $bg-color;
+    color: $second-color;
+}
+
+tooltip calendar {
+    &.header {
+        color: $accent-color;
+        background-color: $base-color;
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+    }
+}
+
+tooltip {
+    background: $base-color;
+    
+    &* {
+        color: $accent-color;
+    }
+}
+
+.icons {
+    background: $base-color;
+    border-radius: 2rem;
+    margin: 4px 0;
+
+    padding: 2px 1rem;
+    border: rgba(128, 128, 128, 0.5) 1px solid;
+}
+
+.icons image {
+    padding: 4px 2px;
+}
+
+.systray {
+    background: $base-color;
+    border-radius: 2rem;
+    margin: 4px 6px;
+    padding: 0.5rem 0rem;
+    border: rgba(128, 128, 128, 0.5) 1px solid;
+}
+
+.time {
+    font-size: 16px;
+    color: $accent-color;
+    font-family: $time-font;
+    background: $base-color;
+
+    border-radius: 2rem;
+    margin: 4px 6px;
+    padding: 1rem 0.3rem;
+}
+
+.time-wallpaper {
+    background: transparent;
+    font-family: $time-wallpaper-font;
+    color: $base-color;
+    font-size: 128px;
+}
+
+.logo {
+    margin: 6px 0;
+    background: $base-color;
+    border-radius: 2rem;
+    padding: 0.1rem 1rem;
+    border: rgba(128, 128, 128, 0.5) 1px solid;
+}

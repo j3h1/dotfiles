@@ -1,0 +1,43 @@
+( defwindow powermenu   :monitor 0
+                        :geometry ( geometry
+                            :y 16
+                            :anchor "center top" )
+
+    ( box :orientation "v" :class "powermenu" :space-evenly false
+        ( box       :orientation "h"
+            ( button        :onclick "shutdown now"
+                ( box   :orientation "v" :space-evenly false
+                    ( image         :path "assets/images/shutdown.svg"
+                                    :image-width 128
+                                    :image-height 128
+                    ) ( label       :text "Shutdown" )
+                )
+            )
+            ( button        :onclick "systemctl suspend && eww close powermenu"
+                ( box   :orientation "v" :space-evenly false
+                    ( image         :path "assets/images/sleep.svg"
+                                    :image-width 128
+                                    :image-height 128
+                    ) ( label       :text "Suspend" )
+                )
+            )
+            ( button        :onclick "reboot"
+                ( box   :orientation "v" :space-evenly false
+                    ( image         :path "assets/images/restart.svg"
+                                    :image-width 128
+                                    :image-height 128
+                    ) ( label       :text "Reboot" )
+                )
+            )
+
+            ( button        :onclick "hyprctl dispatch exit"
+                ( box   :orientation "v" :space-evenly false
+                    ( image         :path "assets/images/logout.svg"
+                                    :image-width 128
+                                    :image-height 128
+                    ) ( label       :text "Log Out" )
+                )
+            )
+        )
+    )
+)

@@ -1,0 +1,13 @@
+( defwindow time_wall   :monitor 0
+                        :geometry ( geometry    :anchor "right bottom" 
+                                                :width "256px"
+                                                :height "416px"
+                        )
+                        :stacking "bottom"
+                        :wm-ignore true
+    ( box   :orientation "v" :class "time-wallpaper" :space-evenly false
+        ( label :text "${time_hour}")
+        ( label :text "${time_minute}")
+        ( label :text "${time_apm}")
+    )
+)

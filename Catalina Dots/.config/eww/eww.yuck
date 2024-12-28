@@ -1,0 +1,8 @@
+( include "modules/widgets.yuck" )
+( include "modules/variables.yuck" )
+
+( include "modules/workspaces.yuck" )
+( include "modules/powermenu.yuck" )
+( include "modules/time_wall.yuck" )
+( include "modules/menu.yuck" )
+( include "modules/bar.yuck" )

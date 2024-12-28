@@ -1,0 +1,49 @@
+( defwidget bar []
+    ( centerbox :orientation "h"
+        ( box       :class "top"
+                    :halign "start"
+                    (top)
+        )
+
+        ( box       :class "center"
+                    :halign "center"
+                    (center)
+        )
+
+        ( box       :class "bottom"
+                    :halign "end"
+                    (bottom)
+        )
+    )
+
+)
+
+( defwidget top []
+    ( box   :orientation "h" :space-evenly false
+        (workspaces)
+    )
+)
+
+( defwidget center []
+    ( box   :orientation "h" :space-evenly false
+        ; {jq(workspaces, '.[] | select(.id == "$(current_workspace)")')}
+        {workspaces[current_workspace - 1].lastwindowtitle}
+    )
+)
+
+( defwidget bottom []
+    ( box   :orientation "h" :space-evenly false
+        (icons)
+        (logo)
+    )
+)
+
+( defwindow bar :monitor 0
+                :geometry ( geometry
+                    :y "8px"
+                    :width "50%"
+                    :height "32px"
+                    :anchor "center top" )
+                :exclusive true
+    (bar)
+)
