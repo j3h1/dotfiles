@@ -1,4 +1,6 @@
-# [Catalina Dots](https://reddit.com/r/unixporn)
+# [Catalina Dots]([https://reddit.com/r/unixporn](https://www.reddit.com/r/unixporn/comments/1ho0fws/hyprland_posting_my_old_daily_driver_before/))
+
+![Showcase](https://raw.githubusercontent.com/j3h1/dotfiles/refs/heads/main/Catalina%20Dots/SHOWCASE.mp4)
 
 ## Dependencies
 ```
