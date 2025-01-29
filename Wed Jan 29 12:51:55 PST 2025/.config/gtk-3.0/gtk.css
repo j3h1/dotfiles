@@ -1,0 +1,22 @@
+window.thunar {
+	background: rgba(0, 0, 0, 0.75);
+}
+
+window.thunar > grid * {
+	background: transparent;
+}
+
+window.thunar > grid > paned > box > .sidebar {
+	margin-left: 16px;
+}
+
+window.thunar *:selected {
+	background-color: #ffffff;
+	color: #000000;
+}
+
+window.thunar > grid > paned > box > .sidebar *:selected {
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+}
+

@@ -1,0 +1,40 @@
+window {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#scroll {
+  padding: 2rem 2rem;
+
+  border-radius: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#outer-box {
+}
+
+#input {
+  all: unset;
+  margin: 1rem 5rem;
+  padding: 2rem;
+
+  color: rgba(255, 255, 255, 1.0);
+}
+
+#entry {
+  transition: all 0.25s;
+  border-radius: 3px;
+
+  background: linear-gradient(270deg, transparent 100%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: inset 0px 0 white;
+}
+
+#entry:selected {
+  background: linear-gradient(270deg, transparent 0%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: inset 4px 0 white;
+}
+
+#img {
+  min-width: 64px;
+}
